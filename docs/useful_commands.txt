@@ -1,5 +1,5 @@
 [ resize and store to lmdb ]
-GLOG_logtostderr=1 $CAFFE_ROOT/build/tools/convert_imageset --resize_height=224 --resize_width=224 --shuffle $PHOTO_ORGANIZER_ROOT/data/train/ $PHOTO_ORGANIZER_ROOT/data/train_labels.txt $PHOTO_ORGANIZER_ROOT/data/train_lmdb
+GLOG_logtostderr=1 $CAFFE_ROOT/build/tools/convert_imageset --resize_height=256 --resize_width=256 --shuffle $PHOTO_ORGANIZER_ROOT/data/train/ $PHOTO_ORGANIZER_ROOT/data/train_labels.txt $PHOTO_ORGANIZER_ROOT/data/train_lmdb
 
 [ compute mean image ]
 $CAFFE_ROOT/build/tools/compute_image_mean $PHOTO_ORGANIZER_ROOT/data/train_lmdb $PHOTO_ORGANIZER_ROOT/data/mean_image.binaryproto

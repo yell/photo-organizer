@@ -2355,5 +2355,4 @@ layer {
   bottom: "fc1000_mpii"
   bottom: "label"
   top: "accuracy"
-  include: { phase: TEST }
 }
