@@ -1,0 +1,1 @@
+$CAFFE_ROOT/build/tools/caffe train --solver=$PHOTO_ORGANIZER_ROOT/models/resnet/solver_150.prototxt --weights=$PHOTO_ORGANIZER_ROOT/models/resnet/ResNet-150-model.caffemodel
