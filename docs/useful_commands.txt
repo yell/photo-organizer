@@ -5,4 +5,7 @@ GLOG_logtostderr=1 $CAFFE_ROOT/build/tools/convert_imageset --resize_height=224 
 $CAFFE_ROOT/build/tools/compute_image_mean $PHOTO_ORGANIZER_ROOT/data/train_lmdb $PHOTO_ORGANIZER_ROOT/data/mean_image.binaryproto
 
 [ path variable ]
-echo 'export PHOTO_ORGANIZER_ROOT="~/Desktop/photo_organizer"' >> ~/.bashrc
+echo 'export PHOTO_ORGANIZER_ROOT="/home/monsta/Desktop/photo_organizer"' >> ~/.bashrc
+
+[ launch caffe ]
+$CAFFE_ROOT/build/tools/caffe train --solver=$PHOTO_ORGANIZER_ROOT/models/resnet/solver.prototxt --weights=$PHOTO_ORGANIZER_ROOT/models/resnet/ResNet-152-model.caffemodel
