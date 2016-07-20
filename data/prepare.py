@@ -70,10 +70,10 @@ def labels(csvfilepath='actions.csv'):
 	
 	with open('train_labels.txt', 'w') as f:
 		for fname, index in train_labels:
-			f.write("$PHOTO_ORGANIZER_ROOT/data/train/{0} {1}\n".format(fname, index))
+			f.write("{0} {1}\n".format(fname, index))
 	with open('test_labels.txt', 'w') as f:
 		for fname, index in test_labels:
-			f.write("$PHOTO_ORGANIZER_ROOT/data/test/{0} {1}\n".format(fname, index))
+			f.write("{0} {1}\n".format(fname, index))
 	
 
 def main():
