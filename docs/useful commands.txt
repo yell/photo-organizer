@@ -1,0 +1,8 @@
+[ resize and store to lmdb ]
+$ GLOG_logtostderr=1 /path/to/caffe/build/tools/convert_imageset --resize_height=224 --resize_width=224 --shuffle / /path/to/train.txt /path/to/train_lmdb
+
+[ compute mean image ]
+$ /path/to/caffe/build/tools/compute_image_mean /path/to/train_lmdb /path/to/mean_image.binaryproto
+
+[ path variable ]
+echo 'export PHOTO_ORGANIZER_ROOT="~/Desktop/photo_organizer"' >> ~/.bashrc
