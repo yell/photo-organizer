@@ -6794,6 +6794,7 @@ layer {
 	type: "InnerProduct"
 	inner_product_param {
 		num_output: 20
+		lr_mult: 10
 	}
 }
 

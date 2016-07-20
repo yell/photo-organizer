@@ -2336,17 +2336,12 @@ layer {
 	bottom: "pool5"
 	top: "fc1000_mpii"
 	name: "fc1000_mpii"
-	type: "InnerProduct"
+	type: "InnerProduct"  
+	#param { lr_mult: 1 decay_mult: 1 }
+  	#param { lr_mult: 2 decay_mult: 0 }
 	inner_product_param {
 		num_output: 20
 	}
-}
-
-layer {
-  bottom: "fc1000_mpii"
-  bottom: "label"
-  name: "loss"
-  type: "SoftmaxWithLoss"
 }
 
 layer {
@@ -2355,4 +2350,12 @@ layer {
   bottom: "fc1000_mpii"
   bottom: "label"
   top: "accuracy"
+}
+
+layer {
+  bottom: "fc1000_mpii"
+  bottom: "label"
+  name: "loss"
+  type: "SoftmaxWithLoss"
+  top: "loss"
 }
