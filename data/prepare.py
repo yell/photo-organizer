@@ -65,14 +65,14 @@ def labels(csvfilepath='actions.csv'):
 				index = labels.index(row[1].replace(' ', '_'))
 				if os.path.isfile('train/{0}'.format(row[0])):
 					train_labels.append((row[0], index))
-				else:
+				elif os.path.isfile('test/{0}'.format(row[0])):
 					test_labels.append((row[0], index))
 	
 	with open('train_labels.txt', 'w') as f:
 		for fname, index in train_labels:
 			f.write("$PHOTO_ORGANIZER_ROOT/data/train/{0} {1}\n".format(fname, index))
 	with open('test_labels.txt', 'w') as f:
-		for fname, index in train_labels:
+		for fname, index in test_labels:
 			f.write("$PHOTO_ORGANIZER_ROOT/data/test/{0} {1}\n".format(fname, index))
 	
 
