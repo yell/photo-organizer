@@ -23,6 +23,12 @@ class Repository(object):
 					data = map(float, row[1:])
 					return data[:self.num_classes], data[self.num_classes:]
 
+	def __iter__(self):
+		with open(self.filename, 'rb') as csvfile:
+			reader = csv.reader(csvfile, **self.csvparams)
+			for row in reader:
+				yield row[0]
+
 
 	def is_stored(self, img_path):
 		''' check if specific image is stored '''
@@ -58,10 +64,3 @@ class Repository(object):
 	@property
 	def filename(self):
 		return self._filename
-
-
-repo = Repository()
-# print repo['c.jpg']
-# repo.store_entry('f.jpg', [0.2] * 14, [0.3] * 5)
-# repo.store_entry('d.jpg', [0.2] * 14, [0.3] * 5)
-# repo.delete_entry('a.jpg')
