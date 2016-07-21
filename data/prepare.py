@@ -109,11 +109,11 @@ def new_labels():
 	]
 
 def resplit(csvfilepath='actions.csv', train_ratio=0.9):
-	# os.rename('train/', 'traintest/')
-	# for (dirpath, dirnames, filenames) in os.walk('test/'):
-	# 	for fname in filenames:
-	# 		os.rename('test/' + fname, 'traintest/' + fname)
-	# os.rmdir('test/')
+	os.rename('train/', 'traintest/')
+	for (dirpath, dirnames, filenames) in os.walk('test/'):
+		for fname in filenames:
+			os.rename('test/' + fname, 'traintest/' + fname)
+	os.rmdir('test/')
 
 	with open('labels.txt', 'w') as f:
 		for index, label in enumerate(new_labels()):
