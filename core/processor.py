@@ -1,10 +1,9 @@
+import os
+import sys
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
-import os
 import caffe
 import cv2
-import csv
 
 def compute_probs(img_path):
     #path to model struct
