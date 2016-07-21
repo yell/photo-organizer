@@ -6,6 +6,7 @@ net: "/home/monsta/Desktop/photo_organizer/models/resnet/ResNet-50-train_mpii.pr
 test_iter: 176
 # Carry out testing every 500 training iterations.
 test_interval: 200
+iter_size: 10
 # The base learning rate, momentum and the weight decay of the network.
 base_lr: 0.001
 momentum: 0.9

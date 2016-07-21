@@ -8,7 +8,7 @@ layer {
   data_param {
     source: "/home/monsta/Desktop/photo_organizer/data/train_lmdb"
     backend: LMDB
-    batch_size: 1
+    batch_size: 5
   }
   transform_param {
     crop_size: 224
@@ -6794,6 +6794,7 @@ layer {
 	type: "InnerProduct"
 	inner_product_param {
 		num_output: 20
+		lr_mult: 10
 	}
 }
 
