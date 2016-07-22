@@ -165,10 +165,40 @@ def resplit(csvfilepath='actions.csv', train_ratio=0.9):
 	os.rmdir('traintest/')
 
 
+def resplit_using_labels():
+	train_labels = []
+	test_labels = []
+	with open('train_labels.txt') as f:
+		for line in f:
+			fname, index = line.strip().split(' ')
+			train_labels.append((fname, index))
+	with open('test_labels.txt') as f:
+		for line in f:
+			fname, index = line.strip().split(' ')
+			test_labels.append((fname, index))
+
+	os.rename('train/', 'traintest/')
+	for (dirpath, dirnames, filenames) in os.walk('test/'):
+		for fname in filenames:
+			os.rename('test/' + fname, 'traintest/' + fname)
+	os.rmdir('test/')
+
+	safe_mkdir('train/')
+	safe_mkdir('test/')
+
+	for fname, _ in train_labels:
+		os.rename('traintest/' + fname, 'train/' + fname)
+	for fname, _ in test_labels:
+		os.rename('traintest/' + fname, 'test/' + fname)
+
+	os.rmdir('traintest/')
+
+
 def main():
 	# split()
 	# labels()
-	resplit()
+	# resplit()
+	resplit_using_labels()
 
 if __name__ == '__main__':
 	main()
