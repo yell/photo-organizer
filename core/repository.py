@@ -62,6 +62,13 @@ class Repository(object):
 			for row in rows:
 				writer.writerow(row)
 
+	def count(self):
+		if not os.path.isfile(self.filename):
+			return 0
+		with open(self.filename, 'rb') as csvfile:
+			reader = csv.reader(csvfile)
+			return len(list(reader))
+
 
 	@property
 	def filename(self):
