@@ -8,11 +8,13 @@ from repository import Repository
 from extractor import probs_feats
 
 
-def main(imgs_path, deploy_path, weights_path, blob_name="pool5/7x7_s1"):
+def main(imgs_path, deploy_path, weights_path, blob_name="pool5/7x7_s1", n=None):
 	repo = Repository()
 	if imgs_path[-1] != '/': imgs_path += '/'
 	for directory, dirnames, filenames in os.walk(imgs_path):
-		for fname in filenames:
+		for index, fname in enumerate(filenames):
+			if n and index >= n:
+				break
 			fpath = imgs_path + fname
 			probs, feats = probs_feats(fpath, deploy_path, weights_path, blob_name)
 			repo.store(fpath, probs, feats)
