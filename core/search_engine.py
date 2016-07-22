@@ -6,7 +6,6 @@ import shutil
 import numpy as np
 import plac
 
-from extractor import probs_feats
 from nlp import identify_class, get_labels
 from repository import Repository
 
