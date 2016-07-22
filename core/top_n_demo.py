@@ -30,10 +30,10 @@ def main(imgs_path='./', csv_path='data.csv', n=5):
 		plt.draw()
 
 		s = raw_input()
-		if index > 0 and index % 15 == 0:
-			plt.close('all')
 		if s:
 			break
+		if index > 0 and index % 15 == 0:
+			plt.close('all')
 
 
 if __name__ == '__main__':
