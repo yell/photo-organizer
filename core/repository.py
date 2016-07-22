@@ -1,6 +1,7 @@
 import os
 import csv
 
+
 class Repository(object):
 
 	def __init__(self, filename='data.csv', num_classes=14):
@@ -26,7 +27,9 @@ class Repository(object):
 		with open(self.filename, 'rb') as csvfile:
 			reader = csv.reader(csvfile, **self.csvparams)
 			for row in reader:
-				yield row[0]
+				fname, data = row[0], row[1:]
+				data = map(float, data)
+				yield fname, data[:self.num_classes], data[self.num_classes:]
 
 
 	def is_stored(self, img_path):

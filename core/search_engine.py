@@ -1,9 +1,15 @@
-import numpy as np
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import os
 import shutil
+import numpy as np
+import plac
 
-import processor
-import nlp
+from extractor import probs_feats
+from nlp import identify_class, get_labels
+from repository import Repository
+
 
 def safe_mkdir(dirpath):
 	try:
@@ -11,33 +17,31 @@ def safe_mkdir(dirpath):
 	except:
 	    os.mkdir(dirpath)
 
-def contents_dir(dirpath):
+def clear_dir(dirpath):
     files = os.listdir(dirpath)
     if len(files) != 0:
         shutil.rmtree(dirpath)
+       	safe_mkdir(dirpath)
+
+def search_by_class(query, csv_path='data.csv', destination_path='./search_result/'):
+    repo = Repository(csv_path)
+    class_name = identify_class(query)
+    retrieved = []
+    print "Searching for category '{0}' ...".format(class_name)
+    for img_path, probs, _ in repo:
+        probs = list(zip(probs, get_labels()))
+        probs.sort()
+        if probs[-1][1] == class_name:
+        	retrieved.append((img_path, probs[-1][0]))
+    retrieved.sort(key=lambda t: -t[1])
+    print "Found {0} images".format(len(retrieved))
+    safe_mkdir(destination_path)
+    clear_dir(destination_path)
+    print "Moving found images to {0} ...".format(destination_path)
+    for img_path, prob in retrieved:
+    	shutil.copyfile(img_path, os.path.join(destination_path, "{0:.3f}_{1}".format(prob, img_path.split('/')[-1])))
+    print "Done!"
 
 
-
-def search_by_class(class_name, photos_path, photos_class_path, deploy_path, weights_path):
-    photos = os.listdir(photos_path)
-    class_prob = []
-    photo_name = []
-    for i in range(len(photos)):
-        image = photos_path + photos[i]
-        predict = processor.probs_feats(image, deploy_path, weights_path)[0]
-        prediction = list(zip(predict, nlp.get_labels()))
-        prediction.sort()
-        prediction_rev = prediction[::-1]
-        if prediction_rev[0][1] == class_name:
-            class_prob.append(prediction_rev[0][0])
-            photo_name.append(photos[i])
-
-    prob_name = list(zip(class_prob, photo_name))
-    if len(prob_name) > 1:
-        prob_name = prob_name.sort(key=lambda t: -t[0])
-
-    safe_mkdir(photos_class_path)
-    contents_dir(photos_class_path)
-
-    for j in range(len(prob_name)):
-        shutil.copyfile(photos_path + prob_name[j][1], photos_class_path + prob_name[j][1])
+if __name__ == '__main__':
+	plac.call(search_by_class)
