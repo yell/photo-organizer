@@ -3,10 +3,9 @@ import csv
 
 class Repository(object):
 
-	def __init__(self, filename='data.csv', num_classes=14, num_feats=5):
+	def __init__(self, filename='data.csv', num_classes=14):
 		self._filename = filename
 		self.num_classes = num_classes
-		self.num_feats = num_feats
 		self.csvparams = dict(
 			delimiter=',', 
 			quotechar='\'',
@@ -40,8 +39,6 @@ class Repository(object):
 			return
 		if len(probs) != self.num_classes:
 			raise ValueError("store_entry: `probs` has invalid size {0} != {1}".format(len(probs), self.num_classes))
-		if len(feats) != self.num_feats:
-			raise ValueError("store_entry: `feats` has invalid size {0} != {1}".format(len(feats), self.num_feats))
 		with open(self.filename, 'ab') as csvfile:
 			writer = csv.writer(csvfile, **self.csvparams)
 			writer.writerow([img_path] + probs + feats)
