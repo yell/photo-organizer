@@ -3,7 +3,7 @@ import csv
 
 class Repository(object):
 
-	def __init__(self, filename='repo.csv', num_classes=14, num_feats=5):
+	def __init__(self, filename='data.csv', num_classes=14, num_feats=5):
 		self._filename = filename
 		self.num_classes = num_classes
 		self.num_feats = num_feats

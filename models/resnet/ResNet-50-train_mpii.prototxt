@@ -2337,10 +2337,10 @@ layer {
 	top: "fc1000_mpii"
 	name: "fc1000_mpii"
 	type: "InnerProduct"  
-	#param { lr_mult: 1 decay_mult: 1 }
+	param { lr_mult: 8 decay_mult: 10 }
   	#param { lr_mult: 2 decay_mult: 0 }
 	inner_product_param {
-		num_output: 20
+		num_output: 14
 	}
 }
 
