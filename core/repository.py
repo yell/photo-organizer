@@ -31,7 +31,9 @@ class Repository(object):
 
 	def is_stored(self, img_path):
 		''' check if specific image is stored '''
-		return self.__getitem__(img_path)
+		if not os.path.isfile(self.filename):
+			return False
+		return bool(self.__getitem__(img_path))
 
 	def store(self, img_path, probs, feats):
 		''' add new entry if not present '''
