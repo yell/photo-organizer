@@ -43,5 +43,3 @@ def identify_class(query, threshold=0.3):
 	if max(similarities) <= threshold:
 		return 'other'
 	return labels[argmax(similarities)]
-
-print identify_class('')
