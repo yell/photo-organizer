@@ -5,29 +5,39 @@ import matplotlib.pyplot as plt
 import caffe
 import cv2
 
-def compute_probs(img_path):
-    #path to model struct
-    model_config = '/home/anton/prj/photo_organizer/models/googlenet/deploy.prototxt'
-    #path to caffemodel
-    model_weights = '/home/anton/prj/photo_organizer/models/googlenet/_iter_4500.caffemodel'
-    caffe.set_mode_gpu()
-    net = caffe.Net(model_config, model_weights, caffe.TEST)
+def feats(img_path, deploy_path, weights_path):
+    channels = 3
+    rows = 224
+    cols = 224
 
-    #path to labels names
-    labels_file = '/home/anton/Downloads/labels.txt'
-    labels = np.loadtxt(labels_file, str, delimiter='\t')
-    labels = labels.tolist()
-    for i in range(20):
-        labels[i] = labels[i].split()
+    net = caffe.Net(deploy_path, weights_path, caffe.TEST)
+    net.blobs['data'].reshape(1, channels, rows, cols)
 
-    for i in range(len(file_list)):
-        image = caffe.io.load_image(img_path)
-        image = cv2.resize(image, (224,224))
-        image = image.swapaxes(0,2).swapaxes(1,2)
-        image = image.reshape(1, 3, 224, 224)
-        net.blobs["data"].data[...] = image
-        probs = net.forward()['prob'].flatten()
-        probs = list(zip(labels, compute_probs(img_path)))
-        prediction.sort(key = lambda t: -t[1])
+    image = caffe.io.load_image(img_path)
+    image = cv2.resize(image, (224, 224))
+    image = image.swapaxes(0,2).swapaxes(1,2)
+    image = image.reshape(1, channels, rows, cols)
+    input_img = image.astype(float)
+    net.blobs["data"].data[...] = input_img
+    probs = net.forward()['prob'].flatten()
+    feats = net.blobs["pool5/7x7_s1"].data
 
-    return probs
+    return([elem[0][0] for elem in feats[0].tolist()])
+
+def probs(img_path, deploy_path, weights_path):
+    channels = 3
+    rows = 224
+    cols = 224
+
+    net = caffe.Net(deploy_path, weights_path, caffe.TEST)
+    net.blobs['data'].reshape(1, channels, rows, cols)
+
+    image = caffe.io.load_image(img_path)
+    image = cv2.resize(image, (224,224))
+    image = image.swapaxes(0,2).swapaxes(1,2)
+    image = image.reshape(1, channels, rows, cols)
+    input_img = image.astype(float)
+    net.blobs["data"].data[...] = input_img
+    probs = net.forward()['prob'].flatten()
+
+    return list(probs)
