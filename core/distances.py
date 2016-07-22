@@ -22,10 +22,8 @@ def distance(u, v, p=1, metric_index=0):
         8: scipy.spatial.distance.cityblock(u, v),
         9: scipy.spatial.distance.cosine(u, v),
         10: scipy.spatial.distance.hamming(u, v),
-        #11: scipy.spatial.distance.mahalanobis(u, v, np.linalg.pinv(np.ma.cov(u, v))),
         11: scipy.spatial.distance.minkowski(u, v, p),
         12: scipy.spatial.distance.sqeuclidean(u, v)
-
     }[metric_index]
 
 def all_distances(img_path1, img_path2, save_path, dist):
