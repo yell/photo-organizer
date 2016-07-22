@@ -34,7 +34,7 @@ class Repository(object):
 		''' check if specific image is stored '''
 		return self.__getitem__(img_path)
 
-	def store_entry(self, img_path, probs, feats):
+	def store(self, img_path, probs, feats):
 		''' add new entry if not present '''
 		if self.is_stored(img_path):
 			return
@@ -46,7 +46,7 @@ class Repository(object):
 			writer = csv.writer(csvfile, **self.csvparams)
 			writer.writerow([img_path] + probs + feats)
 
-	def delete_entry(self, img_path):
+	def delete(self, img_path):
 		''' remove image if present '''
 		if not self.is_stored(img_path):
 			return

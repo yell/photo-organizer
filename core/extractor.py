@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import caffe
 import cv2
 
+
 def probs_feats(img_path, deploy_path, weights_path, blob_name="pool5/7x7_s1"):
     channels = 3
     rows = 224
