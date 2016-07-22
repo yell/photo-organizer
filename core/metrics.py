@@ -23,3 +23,7 @@ def distance(u, v, p=1, metric_index=0):
         11: scipy.spatial.distance.minkowski(u, v, p),
         12: scipy.spatial.distance.sqeuclidean(u, v)
     }[metric_index]
+
+def mahalanobis(u, v, all_feats):
+	cov = np.cov(np.array(all_feats[:len(u)]))
+	return scipy.spatial.distance.mahalanobis(u, v, np.linalg.pinv(cov))

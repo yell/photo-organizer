@@ -26,10 +26,12 @@ def clear_dir(dirpath):
        	safe_mkdir(dirpath)
 
 def search_by_class(query, imgs_path='./', csv_path='data.csv', destination_path='./search_result/'):
-    repo = Repository(csv_path)
+    num_classes, labels = (14, get_labels('mpii')) if csv_path == 'data.csv' else (1000, get_labels('imagenet'))
+    repo = Repository(csv_path, num_classes=num_classes)
+    print num_classes
     print "Your input is '{0}'".format(query)
-    class_name = identify_class(query)
-    print "Searching for category '{0}' ...".format(class_name)
+    class_name = identify_class(query, labels)
+    print "[ Searching for category '{0}' ... ]".format(class_name)
     retrieved = []
     for img_path, probs, _ in repo:
     	img_path = os.path.join(imgs_path, img_path)
@@ -47,7 +49,6 @@ def search_by_class(query, imgs_path='./', csv_path='data.csv', destination_path
     return retrieved
     print "Done!"
 
-
 def main(imgs_path='./', csv_path='data.csv', destination_path='./search_result/'):
 	count = 0
 	plt.ion()
@@ -59,16 +60,15 @@ def main(imgs_path='./', csv_path='data.csv', destination_path='./search_result/
 			break
 
 		if count > 1:
-			# f.close()
-			# axarr.close()
 			plt.close(f)
-			# plt.clf()
-			# plt.cla()
 
 		retrieved = search_by_class(query, imgs_path=imgs_path, csv_path=csv_path, destination_path=destination_path)
-		retrieved[:5]
-		f, axarr = plt.subplots(1, 5)
-		for i in xrange(5):
+		if not retrieved:
+			print "No images found\n\n\n"
+			continue
+		n = min(5, len(retrieved))
+		f, axarr = plt.subplots(1, n)
+		for i in xrange(n):
 			axarr[i].imshow(mpimg.imread(retrieved[i][0]))
 			axarr[i].set_title(str(retrieved[i][1]))
 		plt.draw()
@@ -76,7 +76,5 @@ def main(imgs_path='./', csv_path='data.csv', destination_path='./search_result/
 		print '\n' * 3
 		
 
-
 if __name__ == '__main__':
-	# plac.call(main)
-	main(imgs_path='../data/test/')
+	plac.call(main)
