@@ -49,7 +49,7 @@ def search_by_class(query, imgs_path='./', csv_path='data.csv', destination_path
     return retrieved
     print "Done!"
 
-def main(imgs_path='./', csv_path='data.csv', destination_path='./search_result/'):
+def main(imgs_path='../data/test/', csv_path='data.csv', destination_path='./search_result/'):
 	count = 0
 	plt.ion()
 	while True:
@@ -70,7 +70,9 @@ def main(imgs_path='./', csv_path='data.csv', destination_path='./search_result/
 		f, axarr = plt.subplots(1, n)
 		for i in xrange(n):
 			axarr[i].imshow(mpimg.imread(retrieved[i][0]))
-			axarr[i].set_title(str(retrieved[i][1]))
+			axarr[i].set_title( "{0:.4f}".format(retrieved[i][1]) )
+			axarr[i].xaxis.set_visible(False)
+			axarr[i].yaxis.set_visible(False)
 		plt.draw()
 
 		print '\n' * 3

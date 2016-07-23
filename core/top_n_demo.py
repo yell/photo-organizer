@@ -10,7 +10,7 @@ from nlp import identify_class, get_labels
 from repository import Repository
 
 
-def main(imgs_path='./', csv_path='data.csv', n=5):
+def main(imgs_path='../data/test/', csv_path='data.csv', n=5):
 	n = int(n)
 	repo = Repository(csv_path)
 	plt.ion()
@@ -27,6 +27,7 @@ def main(imgs_path='./', csv_path='data.csv', n=5):
 	
 		img = mpimg.imread(img_path)
 		imgplot = plt.imshow(img)
+		plt.axis('off')
 		plt.draw()
 
 		s = raw_input()
