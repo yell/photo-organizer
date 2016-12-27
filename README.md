@@ -10,7 +10,7 @@ The project goal was to create a core for photo autotagging application using co
 * Find similar photos for a given one.
 
 Demo for the latter feature is presented below:
-![1](https://github.com/monstaHD/photo_organizer/blob/master/visualization%20demos/similar_2.png)
+![1](https://github.com/monstaHD/photo_organizer/blob/master/imgs/similar_2.png)
 For a given photo, 15 the most closest images were shown, almost all of which are turned out to be also tennis photos. 
 Remarkably, that the first (most relevant) 3 photos are actually taken from the very same match as the source image is.
 
