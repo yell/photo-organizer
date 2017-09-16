@@ -31,7 +31,7 @@ We tested around 15 different distance metrics, the most successful:
 * Bray-Curtis dissimilarity measure
 * Cosine distance
 
-## Further improvements
+## Possible improvements
 * Multiple tagging (perhaps by using several different networks)
 * Improve the NLP part (use word2vec/glove models/google API/...)
 * Try more network architectures
