@@ -1,6 +1,5 @@
 # Photo Organizer
-This [project](http://cs.ucu.edu.ua/en/summerschool/project-photo-organizer/) 
-was completed during the Lviv Data Science Summer School 2016. The project supervisor - 
+This project was completed during the Lviv Data Science Summer School 2016. The project supervisor - 
 [Olexandr Baiev](http://cs.ucu.edu.ua/course/deep-neural-networks-for-computer-vision/#lecturer). 
 The project goal was to create a core for photo autotagging application using convolutional neural networks.
 
